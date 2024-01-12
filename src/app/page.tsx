@@ -5,7 +5,7 @@ import VerifyButton from './components/verify-button'
 export default function Home() {
   return (
     <main className="p-24">
-      <p>Success scenario</p>
+      <p>Success scenario (TestNet)</p>
       <div className="flex flex-row gap-2">
 
         <IssueForm />

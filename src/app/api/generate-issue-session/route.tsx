@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
             issuer: "Gateway",
             owner: body.owner,
             dataModel: "ceaf29b1-9c27-4241-bee4-05dee6bd8ce6",
-            callbackUrl: "http://localhost:3000",
+            callbackUrl: process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",
             "claim": {
                 "age": body.age,
             },
