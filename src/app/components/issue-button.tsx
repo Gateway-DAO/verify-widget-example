@@ -19,7 +19,7 @@ export default function IssueButton({ claim, label, isEnabled = true }: Props) {
 
     const onIssue = async () => {
         const result = await trigger(claim)
-        router.push(result.session.url)
+        router.push(`http://${result.session.url}`)
     }
 
     return (<>
