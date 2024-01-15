@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
         const params = {
             key: "b28bc773-f862-40c7-9296-0ebab2fdcf48",
             org: "Gateway",
-            "requestTemplate": body.templateId,
-            "callbackUrl": "https://google.com/"
+            requestTemplate: body.templateId,
+            callbackUrl: "https://verify-widget-example.vercel.app/"
         }
 
         try {
