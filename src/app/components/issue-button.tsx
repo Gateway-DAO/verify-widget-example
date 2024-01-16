@@ -3,14 +3,14 @@
 import fetcher from "@/utils/fetcher";
 import { useRouter } from "next/navigation";
 import useSWRMutation from "swr/mutation";
+import { IssueBody } from "../api/generate-issue-session/route";
 
 type Props = {
-    claim: any
     label?: string
     isEnabled?: boolean
-}
+} & IssueBody;
 
-export default function IssueButton({ claim, label, isEnabled = true }: Props) {
+export default function IssueButton({ claim, owner, dataModel, label, isEnabled = true }: Props) {
     const router = useRouter()
     const { trigger } = useSWRMutation("/api/generate-issue-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
         method: "POST",
@@ -18,11 +18,11 @@ export default function IssueButton({ claim, label, isEnabled = true }: Props) {
     }))
 
     const onIssue = async () => {
-        const result = await trigger(claim)
+        const result = await trigger({ claim, dataModel, owner })
         router.push(result.session.url)
     }
 
     return (<>
-        <button type="button" className="gtw-btn" onClick={onIssue} disabled={!isEnabled}>{label ?? "Issue"}</button>
+        <button type="button" className={["gtw-btn", !isEnabled && "opacity-50"].filter(Boolean).join(" ")} onClick={onIssue} disabled={!isEnabled}>{label ?? "Issue"}</button>
     </>)
 }

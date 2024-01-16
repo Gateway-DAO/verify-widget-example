@@ -1,19 +1,19 @@
 import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
+export type IssueBody = { owner: string; claim: any; dataModel: string }
+
 export async function POST(req: NextRequest) {
     try {
-        const body = (await req.json()) as { owner: string; age: number };
+        const body = (await req.json()) as IssueBody;
 
         const params = {
             key: "b28bc773-f862-40c7-9296-0ebab2fdcf48",
             issuer: "Gateway",
             owner: body.owner,
-            dataModel: "ceaf29b1-9c27-4241-bee4-05dee6bd8ce6",
+            dataModel: body.dataModel,
             callbackUrl: process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",
-            "claim": {
-                "age": body.age,
-            },
+            "claim": body.claim,
         }
 
         try {
