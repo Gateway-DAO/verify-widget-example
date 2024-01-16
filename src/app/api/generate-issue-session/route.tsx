@@ -1,3 +1,4 @@
+import { appendHttps } from "@/utils/https";
 import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -12,7 +13,7 @@ export async function POST(req: NextRequest) {
             issuer: "Gateway",
             owner: body.owner,
             dataModel: body.dataModel,
-            callbackUrl: process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",
+            callbackUrl: appendHttps(process.env.NEXT_PUBLIC_VERCEL_URL!) ?? "http://localhost:3000",
             "claim": body.claim,
         }
 

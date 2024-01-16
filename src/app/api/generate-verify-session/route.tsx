@@ -1,5 +1,8 @@
+import { appendHttps } from "@/utils/https";
 import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
+
+
 
 export async function POST(req: NextRequest) {
     try {
@@ -9,7 +12,7 @@ export async function POST(req: NextRequest) {
             key: "b28bc773-f862-40c7-9296-0ebab2fdcf48",
             org: "Gateway",
             requestTemplate: body.templateId,
-            callbackUrl: "https://verify-widget-example.vercel.app/"
+            callbackUrl: appendHttps(process.env.NEXT_PUBLIC_VERCEL_URL!) ?? "http://localhost:3000",
         }
 
         try {
