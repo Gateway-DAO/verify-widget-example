@@ -12,7 +12,7 @@ type Props = {
 export default function VerifyButton({ label, templateId }: Props) {
 
     const router = useRouter()
-    const { trigger } = useSWRMutation("/api/generate-verify-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
+    const { trigger, isMutating } = useSWRMutation("/api/generate-verify-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
         method: "POST",
         body: JSON.stringify(arg)
     }))
@@ -25,6 +25,9 @@ export default function VerifyButton({ label, templateId }: Props) {
 
 
     return (<>
-        <button type="button" className="gtw-btn" onClick={onVerify}>{label ?? "Verify"}</button>
+        <button type="button" className={["gtw-btn", isMutating && "!opacity-50"].filter(Boolean).join(" ")} disabled={isMutating} onClick={onVerify}>{label ?? "Verify"}
+
+            {isMutating && <span className="animate-spin ml-2">🔄</span>}
+        </button>
     </>)
 }

@@ -12,7 +12,7 @@ type Props = {
 
 export default function IssueButton({ claim, owner, dataModel, label, isEnabled = true }: Props) {
     const router = useRouter()
-    const { trigger } = useSWRMutation("/api/generate-issue-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
+    const { trigger, isMutating } = useSWRMutation("/api/generate-issue-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
         method: "POST",
         body: JSON.stringify(arg)
     }))
@@ -23,6 +23,8 @@ export default function IssueButton({ claim, owner, dataModel, label, isEnabled 
     }
 
     return (<>
-        <button type="button" className={["gtw-btn", !isEnabled && "opacity-50"].filter(Boolean).join(" ")} onClick={onIssue} disabled={!isEnabled}>{label ?? "Issue"}</button>
+        <button type="button" className={["gtw-btn", (!isEnabled || isMutating) && "!opacity-50"].filter(Boolean).join(" ")} onClick={onIssue} disabled={!isEnabled || isMutating}>{label ?? "Issue"}
+            {isMutating && <span className="animate-spin ml-2">🔄</span>}
+        </button>
     </>)
 }
