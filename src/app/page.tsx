@@ -36,7 +36,7 @@ export default function Home() {
         <hr className='my-4' />
 
         <VerifyButton templateId='cb555205-af3f-43cc-ab37-19a68f39e286' label='Verify if you are overage' />
-        <VerifyButton templateId="caab4db4-0a8a-45a3-8470-f7b7e4e7f864" label='Verify if you are overage grandmaster' />
+        <VerifyButton templateId="caab4db4-0a8a-45a3-8470-f7b7e4e7f864" label='Verify if you are an overage grandmaster' />
       </div>
       <hr className='my-10' />
       <div className="flex flex-col gap-2 items-start">
