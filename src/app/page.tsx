@@ -9,6 +9,7 @@ export default function Home() {
       <div className="flex flex-row gap-2">
 
         <IssueForm />
+        <VerifyButton templateId='cb555205-af3f-43cc-ab37-19a68f39e286' label='Verify if you are overage' />
       </div>
       <hr className='my-10' />
       <div className="flex flex-col gap-2 items-start">
