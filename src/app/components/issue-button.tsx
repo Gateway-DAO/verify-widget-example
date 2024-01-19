@@ -10,7 +10,7 @@ type Props = {
     isEnabled?: boolean
 } & IssueBody;
 
-export default function IssueButton({ claim, owner, dataModel, label, isEnabled = true }: Props) {
+export default function IssueButton({ claim, dataModel, label, isEnabled = true }: Props) {
     const router = useRouter()
     const { trigger, isMutating } = useSWRMutation("/api/generate-issue-session", (url, { arg }: { arg: any }) => fetcher<{ session: { url: string } }>(url, {
         method: "POST",
@@ -18,7 +18,7 @@ export default function IssueButton({ claim, owner, dataModel, label, isEnabled 
     }))
 
     const onIssue = async () => {
-        const result = await trigger({ claim, dataModel, owner })
+        const result = await trigger({ claim, dataModel })
         router.push(result.session.url)
     }
 
