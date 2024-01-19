@@ -9,9 +9,8 @@ export async function POST(req: NextRequest) {
         const body = (await req.json()) as { templateId: string };
 
         const params = {
-            key: "b28bc773-f862-40c7-9296-0ebab2fdcf48",
-            org: "Gateway",
-            requestTemplate: body.templateId,
+            widgetKey: "b28bc773-f862-40c7-9296-0ebab2fdcf48",
+            requestTemplateId: body.templateId,
             callbackUrl: appendHttps(process.env.NEXT_PUBLIC_VERCEL_URL!) ?? "http://localhost:3000",
         }
 

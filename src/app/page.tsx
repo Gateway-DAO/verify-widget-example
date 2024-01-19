@@ -1,33 +1,20 @@
-"use client";
 
-import { useState } from 'react';
 import IssueButton from './components/issue-button'
 import VerifyButton from './components/verify-button'
 
 export default function Home() {
 
-  const [gatewayId, setGatewayId] = useState("")
-  const isEnabled = gatewayId?.length > 0;
-
   return (
     <main className="p-24">
       <p>Success scenario (TestNet)</p>
       <div className="flex flex-col gap-2 items-start">
-        <div >
-          <label htmlFor="gatewayId">Gateway ID</label>
-          <input type="text" id="gatewayId" value={gatewayId} onChange={(e) => setGatewayId(e.target.value)} className="ml-4 mb-4 text-black" />
-        </div>
 
         <IssueButton
-          isEnabled={isEnabled}
           dataModel="ceaf29b1-9c27-4241-bee4-05dee6bd8ce6"
-          owner={gatewayId}
           claim={{
             age: 18,
           }} label='Issue an overage PDA' />
         <IssueButton
-          isEnabled={isEnabled}
-          owner={gatewayId}
           dataModel="1310ffbd-7786-4b28-92b1-4b653bfe2be4"
           claim={{
             title: 'grandmaster',
